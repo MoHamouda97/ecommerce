@@ -1,0 +1,1 @@
+$('.full img').wrap('<span style="display:inline-block"></span>').parent().zoom(); 

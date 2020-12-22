@@ -1,0 +1,42 @@
+<nav class="top-nav" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container-fluid">
+        <div class="row center-align">
+            <div class="col-6">
+                <ul class="list-unstyled">
+                    <li matRipple (click)="changeLang()">
+                        <span>{{lang.lang}}</span>
+                    </li>
+                    <li matRipple>
+                        <a routerLink="/my-orders">
+                            <span>{{lang.myOrders}}</span>
+                        </a>                        
+                    </li>
+                    <li matRipple>
+                        <a routerLink="/change-info">
+                            <span>{{lang.changeInfo}}</span>
+                        </a>                        
+                    </li>
+                    <li matRipple>
+                        <a routerLink="/change-password">
+                            <span>{{lang.changePwp}}</span>
+                        </a>                        
+                    </li>                                        
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul class="list-unstyled" style="flex-direction: row-reverse;">
+                    <li matRipple>
+                        <a  routerLink="/register">
+                            <span>{{lang.newAccount}}</span>
+                        </a>                        
+                    </li>
+                    <li matRipple>
+                        <a routerLink="/login">
+                            <span>{{lang.login}}</span>
+                        </a>                        
+                    </li>                                       
+                </ul>                
+            </div>
+        </div>
+    </div>
+</nav>

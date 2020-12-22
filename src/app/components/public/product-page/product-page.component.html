@@ -1,0 +1,173 @@
+<section class="product-details" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container" *ngIf="product.length > 0">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="page-title">
+                   <span *ngIf="getLang() == 'ar'">
+                    {{product[0].name}}
+                   </span>
+                   <span *ngIf="getLang() == 'en'">
+                    {{product[0].name_en}}
+                   </span>
+                </h2>
+            </div>
+            <div class="col-md-6">
+                <div class="gallery">
+                    <div class="pics">
+                    
+                        <a href="{{product[0].img}}" class="full">
+                            <img src="{{product[0].img}}" class="img-fluid"> 
+                        </a> 
+                        <div class="thumbs">
+                            <div class="row">  
+                                <div class="preview col-3" *ngFor="let img of product[0].productphotos"> 
+                                    <a href="#" class="selected" [attr.data-full]="img.photo" data-title="{{product[0].name}}"> 
+                                        <img src="{{img.photo}}" class="img-fluid"/> 
+                                    </a> 
+                                </div>                               
+                            </div>                                                                                                          
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="col-md-6">
+                <div class="wrapper-box">
+                    <div class="row">
+                        <div class="col-4">
+                            <div>
+                                <span  class="for-desc">{{lang.proPageName}}:</span>
+                                <span class="for-desc">{{lang.proPageSize}}:</span>
+                                <span class="for-desc">{{lang.proPageQuantity}}:</span>
+                                <span class="for-desc">{{lang.proPagePrice}}:</span>
+                            </div>                           
+                        </div>
+                        <div class="col-8">
+                            <span style="color:blue" class="desc" *ngIf="getLang() == 'ar'">{{product[0].name}}</span>
+                            <span style="color:blue" class="desc" *ngIf="getLang() == 'en'">{{product[0].name_en}}</span>
+                            <div class="row">
+                                <div class="col" *ngFor="let p of product[0].productsizes">
+                                    <span style="color:blue" class="desc">{{p.size}}</span>
+                                    <span style="color:blue" class="desc">{{p.amount}}</span>
+                                    <span style="color:red" class="desc">                                
+                                        <b [ngClass]="{'found-offer': product[0].offers[0] != null}">
+                                            {{p.current_price * getCurrencyvalue()}} 
+                                        </b>
+                                        <b *ngIf="product[0].offers[0] != null">
+                                            {{(((p.current_price * getCurrencyvalue()) )  -  (p.current_price  * product[0].offers[0].percentage) / 100 ) | number : '1.0-2' }} 
+                                        </b>
+                                        <small>
+                                            {{getCurrencyName()}} 
+                                        </small>                            
+                                    </span>                                    
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>                    
+                </div>
+                <nz-select 
+                    (ngModelChange)="addSizeAndPrice($event)" 
+                    ngModel="0" 
+                    [class.lang-en]="getLang() == 'en'"
+                    id="js_select_size"
+                    style="margin-bottom: 15px;"
+                    *ngIf="isNewLoad">
+                    <nz-option  
+                        nzValue="0" 
+                        [nzLabel]="returnProSize()" 
+                        nzDisabled></nz-option>                      
+                    <nz-option 
+                        *ngFor="let p of product[0].productsizes, let i = index" 
+                        [nzValue]="i"
+                        [attr.p-size]="p.id"
+                        [nzLabel]="p.size"></nz-option>
+                </nz-select>                
+                <app-cart-button *ngIf="isNewLoad" [product]="product" [temp]="'page'"></app-cart-button>
+            </div>            
+        </div>
+    </div>
+
+    <div class="container" style="padding: 40px 0;">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="js_product_description"  class="wrapper-box product-details" *ngIf="getLang() == 'ar'"></div>
+                <div 
+                    id="js_product_description_en" 
+                    [class.lang-en-revert]="getLang() == 'en'"  
+                    class="wrapper-box product-details" 
+                    *ngIf="getLang() == 'en'"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}" style="padding: 40px 0;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="wrapper-box product-ratings">
+                    <ul class="list-unstyled rating-list" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+                        <li>
+                            <span>
+                                <b>{{lang.proRivew}}</b>
+                            </span>
+                            <span *ngIf="rates.length > 0">
+                                <nz-rate [ngModel]="product[0].total_rating[0].stars" [nzDisabled]="true"></nz-rate>
+                            </span>
+                            <span  [class.float-right]="getLang() == 'en'" [class.float-left]="getLang() == 'ar'" style="color: red" *ngIf="rates.length == 0">
+                                <small>{{lang.noProRivew}}</small>
+                            </span>                                                       
+                            <span class="clearfix"></span> 
+                        </li>
+                        <li *ngFor="let rate of rates" class="rating-items">
+                            <div style="margin-bottom: 10px;">
+                                <span [class.add-right]="getLang() == 'en'" [class.add-left]="getLang() == 'ar'" style="font-weight: bold;" *ngIf="rate.user != null">
+                                    {{rate.user.username}}
+                                </span>
+                                <span style="margin-left: 10px; font-weight: bold;" *ngIf="rate.user == null">
+                                    Unknown
+                                </span>                                
+                                <span>
+                                    <nz-rate [ngModel]="rate.rate" [nzDisabled]="true"></nz-rate>                                    
+                                </span>
+                            </div>
+                            <div>
+                                <span>{{rate.comment}}</span>
+                                <small [class.float-right]="getLang() == 'en'" [class.float-left]="getLang() == 'ar'">{{rate.created | date: 'dd-MM-yyyy'}}</small>                                
+                            </div>
+                            <span class="clearfix"></span>                           
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="container" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+        <div class="related-box" style="margin-top: 15px;" *ngIf="related.length > 0; else noRelated">
+            <h3 style="margin-bottom: 15px;">
+                <span>
+                    {{lang.proRelated}}:
+                </span>               
+            </h3>
+            <app-product-card [products]="related" [temp]="'related'"></app-product-card>
+        </div>        
+    </div> 
+
+    <app-loader [loader]="isLoader"></app-loader>
+</section>
+
+<div class="no-data" *ngIf="product.length == 0 && !isLoader" style="padding-top: 55px;">
+    <div class="container">
+        <div class="wrapper-box text-center" style="color: red">            
+            <span>
+                {{lang.noPro}}
+            </span>               
+        </div>
+    </div>
+</div>
+
+<ng-template #noRelated>
+    <div class="wrapper-box text-center" style="color: red">        
+        <span>
+            {{lang.noProRelated}}
+        </span>        
+    </div>
+</ng-template>

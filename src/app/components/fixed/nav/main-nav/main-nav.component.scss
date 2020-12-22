@@ -1,0 +1,97 @@
+@import './../../../../../assets/sass/helpers/vars';
+
+.main-nav{
+    font-size: 20px;
+    padding: 5px 0;
+    background-color: #454346;
+    color: #fff;
+    .nav-menu{
+        display: inline-block;
+        padding: 7px;
+        border-radius: 10px;
+        border: 1px solid $mainColor;
+        color: $mainColor;
+        cursor: pointer;
+    }
+    .logo{width: 90px;}
+
+    ul{
+        .cart{
+            position: relative;
+            .cart-num{
+                position: absolute;
+                top: 0px;
+                left: 5px;
+                font-size: 11px;
+                display: inline-block;
+                height: 15px;
+                width: 15px;
+                padding: 5px;
+                background-color: red;
+                color: #fff;
+                line-height: 6px;
+                border-radius: 50%;
+                text-align: center;                
+            }            
+        }
+        .show-search{display: none;}
+    }
+}
+
+.lang-ar{
+    .logo{margin-right: 10px;}
+
+    ul{
+        .login{
+            i{margin-left: 10px;}
+        }
+    }
+}
+
+.lang-en{
+    .logo{margin-left: 10px;}
+
+    ul{
+        .login{
+            i{margin-right: 10px;}
+        }
+
+        .cart{
+            .cart-num{
+                top: -7px;             
+            }            
+        }        
+    }    
+}
+
+@media (min-width: 320px) and (max-width: 641px) {
+    .main-nav{
+        .searchbar{display: none;}
+        ul{
+            .show-search{display: inline-block;}
+        }                      
+    }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .main-nav{
+        font-size: 13px;
+        .logo{width: 35px;}         
+    }
+
+    .lang-en{
+        ul{
+            .cart{
+                .cart-num{top: -7px;}            
+            }
+        }
+    }
+
+    .lang-ar{
+        ul{
+            .cart{
+                .cart-num{top: -2px;}            
+            }
+        }
+    }    
+}

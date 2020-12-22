@@ -1,0 +1,27 @@
+.checkout{color: #6f6f6f;}
+
+.checkout ul li{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 15px;
+}
+
+.card-title{margin-bottom: 20px;}
+
+#js_payment_box_paypal{margin-top: 25px;}
+
+#js_payment_box_cash{
+    margin-top: 25px;
+    display: none;
+}
+
+.order-now{
+    color: #fff;
+    border-color: #7cb62e;
+    background-color: #91CE3F;
+    background-image: linear-gradient(top,#91ce3f,#87af40);
+    background-image: -webkit-linear-gradient(top,#91ce3f,#87af40);
+    display: block;
+    margin-top: 10px;
+}
+.card {height: 458px;}

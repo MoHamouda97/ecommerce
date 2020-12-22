@@ -1,0 +1,31 @@
+@import './../../../../../assets/sass/helpers/vars';
+
+.footer-links{
+    margin-top: 25px;
+
+    .footer-title{
+        font-size: 15px;
+        color: $mainColor;
+        padding-bottom: 12px;
+        border-bottom: 1px solid $mainColor;
+        font-weight: bold;
+    }
+
+    ul{
+        margin-bottom: 20px;
+
+        li{
+            a {
+                padding: 2px;
+                border-radius: 5px;
+                display: inline-block;
+                color:black;
+                transition: all .3s ease-out;
+                
+                &:hover{
+                    color: #4ac4fa !important;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,38 @@
+<section class="category" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container" *ngIf="products.length > 0; else noDataTemp">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="page-title" *ngIf="products.length > 0">
+                    <span *ngIf=" getLang() == 'ar'">
+                        {{products[0].category.name}}
+                    </span>
+                    <span *ngIf=" getLang() == 'en'">
+                        {{products[0].category.name_en}}
+                    </span>                                          
+                </h2>                
+            </div>
+        </div>
+
+        <app-product-card [products]="products" [temp]="'new'"></app-product-card>
+    </div>
+    <div class="user-alert text-center">
+        <p *ngIf="paginationLoader">
+            <i nz-icon nzType="loading" class="loading-icon" style="color: #1890ff;"></i> 
+            {{lang.storProductLoader}}
+        </p>
+        <p *ngIf="pagination === 0">
+            <i nz-icon nzType="info-circle" nzTheme="outline" style="color: #faad14"></i>
+            {{lang.storProductNoProducts}}
+        </p>                            
+    </div>
+    
+    <app-loader [loader]="isLoader"></app-loader>
+</section>
+
+<ng-template #noDataTemp>
+    <div class="no-data container">
+        <div class="wrapper-box text-center" style="color: red">
+            {{lang.storProductNotFound}}
+        </div>
+    </div>
+</ng-template>

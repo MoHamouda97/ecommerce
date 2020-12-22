@@ -1,0 +1,67 @@
+<section [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container">
+        <h2 class="page-title">
+            {{lang.changeInfoTitle}}
+        </h2>
+
+        <form
+            nz-form
+            [formGroup]="infoForm"
+            (ngSubmit)="change()">
+            <div class="input-group-lg">     
+        
+                <nz-form-item class="info-form">
+                    <nz-form-control [nzErrorTip]="errorTipEmailNew()">
+                        <nz-input-group nzPrefixIcon="inbox" class="input-icon">
+                                <input
+                                    type="email"
+                                    class="form-control" 
+                                    nz-input 
+                                    formControlName="email" 
+                                    [placeholder]="lang.newEmailPlaceHolder"
+                                    [(ngModel)]="inputValue" 
+                                    (input)="onInput($event)" 
+                                    [nzAutocomplete]="auto" />   
+                                    <nz-autocomplete #auto>
+                                        <nz-auto-option *ngFor="let option of options" [nzValue]="option">{{ option }}</nz-auto-option>
+                                    </nz-autocomplete>                     
+                        </nz-input-group>                
+                    </nz-form-control>            
+                </nz-form-item>
+        
+                <nz-form-item class="info-form">
+                    <nz-form-control [nzErrorTip]="errorTipMobileNew()">
+                        <nz-input-group nzPrefixIcon="mobile" class="input-icon">
+                                <input 
+                                    type="number"
+                                    class="form-control" 
+                                    nz-input 
+                                    formControlName="mobile" 
+                                    [placeholder]="lang.newMobilePlaceHolder"/>                      
+                        </nz-input-group>
+                    </nz-form-control>           
+                </nz-form-item>               
+            </div>
+            <div class="input-group-lg">
+                <nz-form-item>
+                    <nz-form-control>
+                        <button
+                            [disabled]="!infoForm.valid"
+                            class="form-control" 
+                            nz-button 
+                            matRipple>
+                            <div class="loader text-center w-100" *ngIf="loader">
+                                <nz-spin nzSimple></nz-spin>
+                            </div>                         
+                            <span>
+                                {{lang.changeInfoBtn}}
+                            </span>                        
+                        </button>
+                    </nz-form-control>
+                </nz-form-item>                    
+            </div>      
+        </form>        
+    </div>
+
+    <app-loader [loader]="isDataLoaded"></app-loader>
+</section>

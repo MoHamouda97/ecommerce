@@ -1,0 +1,38 @@
+<section class="category" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container" *ngIf="cats.length > 0; else noDataTemp">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="page-title" *ngIf="cats.length > 0">
+                    <span *ngIf="getLang() == 'ar'">
+                        {{ cats[0].subcat ? cats[0].subcat.name : cats[0].category.name}}
+                    </span>
+                    <span *ngIf="getLang() == 'en'">
+                        {{ cats[0].subcat ? cats[0].subcat.name_en : cats[0].category.name_en}}
+                    </span>                    
+                </h2>                
+            </div>
+        </div>
+
+        <app-product-card [products]="cats" [temp]="'cat'"></app-product-card>
+    </div>
+    <div class="user-alert text-center">
+        <p *ngIf="paginationLoader">
+            <i nz-icon nzType="loading" class="loading-icon" style="color: #1890ff; position: relative; top: -3px;"></i> 
+            {{lang.categoryPagination}}
+        </p>
+        <p *ngIf="pagination === 0">
+            <i nz-icon nzType="info-circle" nzTheme="outline" style="color: #faad14; position: relative; top: -3px;"></i>
+            {{lang.categoryPaginationNotFound}}
+        </p>                            
+    </div>
+    
+    <app-loader [loader]="isLoader"></app-loader>
+</section>
+
+<ng-template #noDataTemp>
+    <div class="no-data container">
+        <div class="wrapper-box text-center" style="color: red">
+            {{lang.noCategoryProduct}}
+        </div>
+    </div>
+</ng-template>

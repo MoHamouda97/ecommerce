@@ -1,0 +1,10 @@
+@import './../../../../../assets/sass/helpers/vars';
+
+.copyright{
+    color:$mainColor;
+    line-height: 60px;
+    background-color: #565357;
+    border-top: 1px solid $mainColor;
+    font-weight: bold;
+    text-align: center !important;
+}

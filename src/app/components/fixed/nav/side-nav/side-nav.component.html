@@ -1,0 +1,80 @@
+<nav id="js_small_nav" class="small-nav" >
+    <button id="js_close_nav" mat-icon-button>
+        <i class="fas fa-times"></i>
+    </button>
+
+    <ul class="lis-unstyled" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+        <li>
+            <a class="closenav" routerLink="/" matRipple>
+                <i class="fas fa-home"></i>
+                {{lang.home}}               
+            </a>
+        </li>  
+        <li>
+            <a class="closenav" routerLink="/my-orders" matRipple>
+                {{lang.myOrders}}               
+            </a>
+        </li>
+        <li>
+            <a class="closenav" routerLink="/change-info" matRipple>
+                {{lang.changeInfo}}              
+            </a>
+        </li> 
+        <li>
+            <a class="closenav" routerLink="/change-password" matRipple>
+                {{lang.changePwp}}              
+            </a>
+        </li> 
+        <li class="nav-separator">
+            {{lang.categories}}
+        </li>                                     
+        <li *ngFor="let link of links" [class.dropdown-small]="link.subcats.length != 0">
+            <a class="closenav" routerLink="category/{{link.id}}/0" *ngIf="link.subcats.length == 0" matRipple>
+                <span>
+                    {{link.name}}
+                </span>
+            </a>
+            <span *ngIf="link.subcats.length != 0" matRipple>
+                <span>{{link.name}}</span>
+                <i class="fas fa-chevron-down"></i>                
+            </span>
+            <ul class="list-unstyled sub-menu" style="display: none;" *ngIf="link.subcats.length != 0" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+                <li *ngFor="let sub of link.subcats">
+                    <a class="closenav" routerLink="category/{{sub.id}}/1" matRipple>
+                        {{sub.name}}
+                    </a>
+                </li>
+            </ul>
+        </li>               
+    </ul>  
+
+   <ul class="lis-unstyled" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+        <li class="nav-separator">
+            {{lang.selectCurrency}}
+        </li>
+        <li class="dropdown-small" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+            <span matRipple>
+                {{lang.currency}}   
+                <i class="fas fa-chevron-down"></i>                
+            </span>
+            <ul class="list-unstyled sub-menu" style="display: none;" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+                <li  class="closenav"
+                    *ngFor="let c of currencies" 
+                    (click)="setCurrencySettings(c.id, c.value, c.name_ar)">
+                    <span matRipple>
+                        <b *ngIf="getLang() == 'ar'">{{c.name_ar}}</b>
+                        <b *ngIf="getLang() == 'en'">{{c.name}}</b>                       
+                    </span>                    
+                </li>                                              
+            </ul>            
+        </li>
+        <li class="nav-separator">
+            {{lang.languages}}
+        </li>        
+        <li class="dropdown-small" (click)="changeLang()" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">  
+            <a>
+                {{lang.lang}} 
+            </a>                                
+        </li>                  
+   </ul>
+</nav>

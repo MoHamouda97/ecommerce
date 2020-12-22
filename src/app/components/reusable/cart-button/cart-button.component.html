@@ -1,0 +1,15 @@
+<button 
+    class="btn add-to-cart w-100 d-block text-center" 
+    matRipple 
+    (click)="addToCart($event, product)"
+    [disabled]="isAdded"
+    [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <span *ngIf="!isAdded">
+        <i class="fa fa-shopping-cart"></i>
+        {{lang.addToCart}}
+    </span>
+    <span *ngIf="isAdded">
+        <i class="fas fa-check-circle"></i>
+        {{lang.addedToCart}}
+    </span>      
+</button>

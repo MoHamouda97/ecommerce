@@ -1,0 +1,197 @@
+<section class="my-orders" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="page-title">
+                            <span>{{lang.myOrdersTitle}}</span>
+                         </h2>
+                    </div>
+                    <div class="col-6">
+                        <nz-select (ngModelChange)="filterOrders($event)" ngModel="ready">
+                            <nz-option  nzValue="ready" [nzLabel]="lang.myOrdersReady"></nz-option>
+                            <nz-option  nzValue="on-road" [nzLabel]="lang.myOrdersOnRoad"></nz-option>
+                            <nz-option  nzValue="done" [nzLabel]="lang.myOrdersDone"></nz-option>
+                            <nz-option  nzValue="delivred" [nzLabel]="lang.myOrdersDelivred"></nz-option>
+                        </nz-select>                      
+                    </div>                    
+                </div>                         
+            </div>
+            <div class="col-md-12">
+                <div class="wrapper-box">
+                    <div class="table-responsive">
+                        <table class="table text-center">
+                            <thead>
+                              <tr class="d-flex">
+                                <th scope="col" class="col-5 col-lg-3">
+                                    <span>{{lang.OrderNumber}}</span>
+                                </th>
+                                <th scope="col" class="col-8 col-lg-3">
+                                    <span>{{lang.OrderStatus}}</span>                                  
+                                </th>
+                                <th scope="col" class="col-6 col-lg-3">
+                                    <span>{{lang.OrderDate}}</span>                                    
+                                </th>
+                                <th scope="col" class="col-6 col-lg-3">
+                                    <span>{{lang.OrderTotal}}</span>                                    
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="order-record d-flex" *ngFor="let order of orders; let i = index" (click)="showDetails(i)">
+                                <td class="col-5 col-lg-3">{{order.id}}</td>
+                                <td class="col-8 col-lg-3">
+                                    <nz-alert
+                                        nzType="warning"
+                                        [nzMessage]="lang.myOrdersReady"
+                                        nzShowIcon
+                                        *ngIf="order.order_status == 1">                                        
+                                    </nz-alert>                                      
+                                    <nz-alert
+                                        nzType="info"
+                                        [nzMessage]="lang.myOrdersOnRoad"
+                                        nzShowIcon
+                                        *ngIf="order.order_status == 2">                                        
+                                    </nz-alert>                                       
+                                    <nz-alert
+                                        nzType="success"
+                                        [nzMessage]="lang.myOrdersDone"
+                                        nzShowIcon
+                                        *ngIf="order.order_status == 3">                                        
+                                    </nz-alert>                                              
+                                    <nz-alert
+                                        nzType="success"
+                                        [nzMessage]="lang.myOrdersDelivred"
+                                        nzShowIcon
+                                        *ngIf="order.order_status == 4">                                        
+                                    </nz-alert>                                                                                                                                                                                
+                                </td>
+                                <td class="col-6 col-lg-3">
+                                    {{order.created | date: 'dd-MM-yyyy'}}                           
+                                </td> 
+                                <td class="col-6 col-lg-3">
+                                    {{order.price * getCurrencyvalue() | number:'1.0'}}
+                                    {{getCurrencyName()}}
+                                </td>
+                              </tr>                    
+                            </tbody>
+                          </table>
+                    </div>                     
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-loader [loader]="isLoader"></app-loader>
+</section>
+
+<nz-modal 
+    [(nzVisible)]="isVisible" 
+    [nzTitle]="modalTitle()" 
+    (nzOnCancel)="handleCancel()" 
+    [nzWidth]="1200" 
+    [nzClassName]="'lang-en-revert'">
+    <div class="table-responsive">
+        <table class="table text-center" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+            <thead>
+              <tr class="d-flex">
+                <th scope="col" class="col-3 col-lg-2">
+                    <span>{{lang.orderProImage}}</span>
+                </th>
+                <th scope="col" class="col-3 col-lg-2">
+                    <span>{{lang.orderProName}}</span>                    
+                </th>
+                <th scope="col" class="col-2 col-lg-2">
+                    <span>{{lang.orderProQuantity}}</span>                      
+                </th>
+                <th scope="col" class="col-2 col-lg-2">
+                    <span>{{lang.orderProPrice}}</span>                     
+                </th>
+                <th scope="col" class="col-2 col-lg-2">
+                    <span>{{lang.orderProTotal}}</span>                      
+                </th>
+                <th scope="col" class="col-3 col-lg-2">
+                    <span>{{lang.orderProReview}}</span>                    
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let o of order" class="order-record d-flex">
+                <td class="col-3 col-lg-2">
+                    <img src="{{o.productsize.product.img}}" alt="product image" style="height: 50px; width: 50px; border-radius: 50%;" />
+                </td>
+                <td class="col-3 col-lg-2">{{o.productsize.product.name}}</td>
+                <td class="col-2 col-lg-2">{{o.amount}}</td> 
+                <td class="col-2 col-lg-2">{{(o.productsize.current_price  * getCurrencyvalue())  }}</td>
+                <td class="col-2 col-lg-2">{{(o.amount * o.productsize.current_price) * getCurrencyvalue() }}</td>
+                <td class="col-3 col-lg-2">
+                    <button class="btn btn-success" matRipple (click)="addRate(o.productsize.product_id)">
+                        <span>{{lang.orderProReview}}</span>
+                    </button>
+                </td>
+              </tr>                    
+            </tbody>
+        </table>
+
+        <nz-divider></nz-divider>
+
+        <form
+            nz-form
+            [formGroup]="rateForm"
+            (ngSubmit)="rate()"
+            class="form"
+            [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+            <div class="input-group-lg">
+                <nz-form-item class="rate-form">
+                    <nz-form-label 
+                        [nzSpan]="7" 
+                        nzRequired
+                        [class.text-left]="getLang() == 'en'"
+                        [class.text-right]="getLang() == 'ar'">{{lang.proRateLable}}</nz-form-label>
+                    <nz-form-control 
+                        [nzSpan]="12" 
+                        [nzErrorTip]="errorRateUsername()"
+                        [class.text-left]="getLang() == 'en'"
+                        [class.text-right]="getLang() == 'ar'">
+                        <nz-rate [ngModel]="0" formControlName="rate"></nz-rate> 
+                    </nz-form-control>                    
+                </nz-form-item>                
+        
+                <nz-form-item class="rate-form">
+                    <nz-form-label 
+                        [nzSpan]="7" 
+                        nzRequired
+                        [class.text-left]="getLang() == 'en'"
+                        [class.text-right]="getLang() == 'ar'">{{lang.proRateCommint}}</nz-form-label>
+                    <nz-form-control 
+                        [nzSpan]="12" 
+                        [nzErrorTip]="errorRateCommint()"
+                        [class.text-right]="getLang() == 'en'"
+                        [class.text-left]="getLang() == 'ar'">
+                        <textarea rows="4" nz-input formControlName="comment"></textarea>
+                    </nz-form-control>                    
+                </nz-form-item>               
+            </div>
+
+            <div class="input-group-lg">
+                <nz-form-item>
+                    <nz-form-control>
+                        <button
+                            [disabled]="!rateForm.valid"
+                            class="form-control" 
+                            nz-button 
+                            matRipple>
+                            <div class="loader text-center w-100" *ngIf="loader">
+                                <nz-spin nzSimple></nz-spin>
+                            </div>                        
+                            <span>
+                                {{lang.proRateAdd}}
+                            </span>                              
+                        </button>
+                    </nz-form-control>
+                </nz-form-item>                    
+            </div>
+        </form>        
+    </div>     
+</nz-modal>

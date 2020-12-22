@@ -1,0 +1,37 @@
+@import './../../../../../assets/sass/helpers/vars';
+
+.top-nav{
+    background-color: #f8f8f8;
+    border-bottom: 1px solid $mainColor;
+    padding: 5px 0;
+    font-size: 12px;
+    ul{
+        display: flex;
+        li{
+            padding: 5px;
+            text-align: center;
+            border-radius: 5px;
+            margin-left: 8px;
+            cursor: pointer;
+
+            a{color: #212529 !important;}
+        }
+    }
+}
+
+@media (min-width: 320px) and (max-width: 641px) {
+    .top-nav{
+        display: none;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .top-nav{
+        ul{
+            li{
+                font-size: 13px;
+                margin-left: 5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+.slider{
+    direction: ltr !important;
+
+    .slide{
+        height: 325px;
+        border-radius: 5px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) { 
+    .slider {
+        .slide{height: 250px;}
+    } 
+}
+
+@media (min-width: 768px) and (max-width: 768px) { 
+    .slider {
+        .slide{height: 200px;}
+    }     
+}
+
+@media (min-width: 300px) and (max-width: 767px) { 
+    .slider {
+        .slide{height: 150px;}
+    } 
+}

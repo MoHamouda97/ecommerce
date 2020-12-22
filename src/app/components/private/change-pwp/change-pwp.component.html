@@ -1,0 +1,80 @@
+<section [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container">
+        <h2 class="page-title">
+            {{lang.changePwpTitle}}
+        </h2>
+        
+        <form
+            nz-form
+            [formGroup]="pwpForm"
+            (ngSubmit)="change()">
+            <div class="input-group-lg">
+                <nz-form-item class="pwp-form">
+                    <nz-form-control [nzErrorTip]="errorExistingPwp()">
+                        <nz-input-group nzPrefixIcon="lock" class="input-icon">
+                                <input
+                                    type="password"
+                                    class="form-control" 
+                                    nz-input 
+                                    formControlName="oldPwp" 
+                                    [placeholder]="lang.changePwpExisting"/>                      
+                        </nz-input-group>
+                    </nz-form-control>           
+                </nz-form-item>
+        
+                <nz-form-item class="pwp-form">
+                    <nz-form-control [nzErrorTip]="errorNewPwp()">
+                        <nz-input-group nzPrefixIcon="lock" class="input-icon">
+                                <input
+                                    type="password"
+                                    class="form-control" 
+                                    nz-input 
+                                    formControlName="newPwp"                             
+                                    [placeholder]="lang.changePwpNew"/>                                                 
+                        </nz-input-group>
+                    </nz-form-control>           
+                </nz-form-item>
+        
+                <nz-form-item class="pwp-form">
+                    <nz-form-control [nzErrorTip]="errorTpl">
+                        <nz-input-group nzPrefixIcon="lock" class="input-icon">
+                                <input
+                                    type="password"
+                                    class="form-control" 
+                                    nz-input 
+                                    formControlName="rePwp" 
+                                    (ngModelChange)="updateConfirmValidator()"
+                                    [placeholder]="lang.changePwpRe"/> 
+                                    <ng-template #errorTpl let-control>
+                                        <ng-container *ngIf="control.hasError('required')">
+                                            {{errorReNewPwp()}}
+                                        </ng-container>
+                                        <ng-container *ngIf="control.hasError('confirm')">
+                                            {{errorReNewPwp()}}
+                                        </ng-container>
+                                    </ng-template>                                                  
+                        </nz-input-group>
+                    </nz-form-control>           
+                </nz-form-item>           
+            </div>
+            <div class="input-group-lg">
+                <nz-form-item>
+                    <nz-form-control>
+                        <button
+                            [disabled]="!pwpForm.valid"
+                            class="form-control" 
+                            nz-button 
+                            matRipple>
+                            <div class="loader text-center w-100" *ngIf="loader">
+                                <nz-spin nzSimple></nz-spin>
+                            </div>                        
+                            <span>
+                                {{lang.changePwpBtn}}
+                            </span>                        
+                        </button>
+                    </nz-form-control>
+                </nz-form-item>                    
+            </div>
+        </form>        
+    </div>
+</section>

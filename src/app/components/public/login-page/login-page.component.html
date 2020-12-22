@@ -1,0 +1,17 @@
+<div 
+    class="login bg-img" 
+    style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(./../../../../assets/images/login.jpg);">
+    <div class="login-form d-flex align-center">
+        <div class="form-wrapper">
+            <div class="logo text-center">
+                <a routerLink="/" matRipple class="special-link" style="margin: auto;">
+                    <img src="./../../../../assets/images/ajwad.png" alt="logo" width="100px" />
+                </a>            
+            </div>
+
+            <div class="login-form" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+                <app-login-form></app-login-form>
+            </div>             
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<ul class="footer-social-links list-unstyled text-center" *ngIf="data[4] != null">
+    <li>
+        <a href="{{data[4]['link']}}" target="_blank" matRipple>
+            <i class="fab fa-twitter"></i>
+        </a>
+    </li>
+    <li>
+        <a href="{{data[5].link}}" target="_blank" matRipple>
+            <i class="fab fa-instagram"></i>
+        </a>
+    </li> 
+    <li>
+        <a href="https://api.whatsapp.com/send?phone={{data[1].link}}" target="_blank" matRipple>
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </li> 
+    <li>
+        <a href="https://api.whatsapp.com/send?phone={{data[2].link}}" target="_blank" matRipple>
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </li> 
+    <li>
+        <a href="mailto:Support@shopgate.om" target="_blank" matRipple>
+            <i class="fa fa-envelope"></i>
+        </a>
+    </li>            
+</ul>

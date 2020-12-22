@@ -1,0 +1,102 @@
+@import './../../../../../assets/sass/helpers/vars';
+
+
+.small-nav{
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 999999;
+    top: 0; 
+    right: -500px;
+    background-color: #454346;
+    overflow-x: hidden;
+    transition: 0.3s;
+
+    button{
+        color: $mainColor;
+        outline: 0;
+        background-color: transparent;
+        border-radius: 5px;
+    }
+
+    ul {
+        li{
+            border-bottom: 1px solid $mainColor;
+            cursor: pointer;
+
+            a{
+                position: relative;
+                display: block;
+                padding: 10px;       
+                color: #eaeaea !important;
+                text-decoration: none;                
+            } 
+            
+            span{
+                position: relative;
+                display: block;
+                padding: 10px;       
+                color: #eaeaea;
+                text-decoration: none;
+
+                i{
+                    position: absolute;
+                    left: 10px;
+                    top: 50%;
+                    transform: translate(0, -50%);                    
+                }
+            }
+        }
+
+        .nav-separator{
+            border-bottom: 1px solid #5e5e5e;
+            display: block;
+            padding: 10px;      
+            background: #444;
+            border-top: 1px solid #5e5e5e;
+            color: #999;
+            color: #999;
+            display: block;
+            text-transform: uppercase;
+            font-weight: 700;
+            line-height: 1.5; 
+            cursor: default !important;           
+        }
+
+        .dropdown{position: relative;}
+
+        .sub-menu{
+            position: relative;
+            background-color: #000;
+            text-align: right;
+            top: 10px;
+            min-width: 170px;
+            z-index: 99999;
+            width: 90%;
+            margin: auto;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+            margin-bottom: 10px;
+
+            li{
+                a{font-size: 15px;}
+            }
+            
+            li:last-of-type{
+                border-color: transparent;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .lang-en{
+        li{   
+            span{
+                i{
+                    right: 10px;
+                    left: auto;                
+                }
+            }
+        }        
+    }
+}

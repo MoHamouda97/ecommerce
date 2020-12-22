@@ -1,0 +1,41 @@
+.price{
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 14px;
+}
+
+.price del{
+    margin-left: 10px;
+    color: #f44440;
+}
+
+.offer-percentage{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: red;
+    color: #fff;
+    height: 50px;
+    width: 50px;
+    line-height: 40px;
+}
+
+.store-box{
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    padding: 10px 0;
+    h4{
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .store-cover{
+        height: 220px;
+        background-size: cover !important;
+        margin-bottom: 15px;
+    }
+    h5{
+        margin: 0 10px;
+    }
+}

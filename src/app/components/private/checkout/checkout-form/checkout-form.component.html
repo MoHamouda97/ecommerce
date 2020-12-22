@@ -1,0 +1,150 @@
+<form
+    nz-form
+    [formGroup]="checkForm"
+    [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="input-group-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <nz-form-item class="ceck-form">
+                    <nz-form-control nzErrorTip="بالرجاء كتابة رقم الهاتف" *ngIf="getLang() == 'ar'">
+                        <nz-input-group [nzAddOnAfter]="addOnBeforeTemplate">
+                            <input 
+                                formControlName="phone" 
+                                id="'phone'" 
+                                nz-input
+                                style="color: black;"
+                                type="number"
+                                class="form-control"
+                                placeholder="رقم الهاتف"
+                                id="js_phone" />
+                                <ng-template #addOnBeforeTemplate>
+                                    <nz-select ngModel="default" formControlName="phoneNumberPrefix" class="phone-select"                                 style="color: black;"
+                                    >
+                                      <nz-option nzLabel="مفتاح الخط" nzValue="default" nzDisabled></nz-option>
+                                      <nz-option 
+                                          *ngFor="let c of countries" 
+                                          [nzValue]="c.code" 
+                                          [nzLabel]="c.code"></nz-option>
+                                    </nz-select>
+                                  </ng-template>
+                        </nz-input-group> 
+                    </nz-form-control> 
+                    <nz-form-control nzErrorTip="Please enter your phone number" *ngIf="getLang() == 'en'" [class.text-left]="getLang() == 'en'">
+                        <nz-input-group [nzAddOnAfter]="addOnBeforeTemplate">
+                            <input 
+                                formControlName="phone" 
+                                id="'phone'" 
+                                nz-input
+                                style="color: black;"
+                                type="number"
+                                class="form-control"
+                                placeholder="Phone Number"
+                                id="js_phone" />
+                                <ng-template #addOnBeforeTemplate>
+                                    <nz-select ngModel="default" formControlName="phoneNumberPrefix" class="phone-select"                                 style="color: black;"
+                                    >
+                                      <nz-option nzLabel="Key" nzValue="default" nzDisabled></nz-option>
+                                      <nz-option 
+                                          *ngFor="let c of countries" 
+                                          [nzValue]="c.code" 
+                                          [nzLabel]="c.code"
+                                          [class.lang-en]="getLang() == 'en'"></nz-option>
+                                    </nz-select>
+                                  </ng-template>
+                        </nz-input-group> 
+                    </nz-form-control>                                            
+                </nz-form-item>   
+            </div>
+            <div class="col-md-6">
+                <nz-form-item  >
+                    <nz-form-control nzErrorTip="بالرجاء اختيار الدولة" *ngIf="getLang() == 'ar'">
+                        <nz-select    
+                            (ngModelChange)="selectCountry($event)" 
+                            ngModel="country" 
+                            formControlName="country" 
+                            [nzSize]="'large'">
+                            <nz-option nzValue="country" nzLabel="اختيار الدولة ..." nzDisabled ></nz-option>
+                            <nz-option 
+                                *ngFor="let c of countries" 
+                                [nzValue]="c.name" 
+                                [nzLabel]="c.name"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                    <nz-form-control nzErrorTip="Please select country" *ngIf="getLang() == 'en'" [class.text-left]="getLang() == 'en'">
+                        <nz-select    
+                            (ngModelChange)="selectCountry($event)" 
+                            ngModel="country" 
+                            formControlName="country" 
+                            [nzSize]="'large'"
+                            class="lang-en-revert text-left">
+                            <nz-option nzValue="country" nzLabel="Select Country ..." nzDisabled ></nz-option>
+                            <nz-option 
+                                *ngFor="let c of countries" 
+                                [nzValue]="c.name_en" 
+                                [nzLabel]="c.name_en"
+                                [class.text-left-revert]="getLang() == 'en'"></nz-option>
+                        </nz-select>
+                    </nz-form-control>                    
+                </nz-form-item>    
+            </div>
+            <div class="col-md-6">
+                <nz-form-item class="chek-form">
+                    <nz-form-control nzErrorTip="بالرجاء كتابة العنوان" *ngIf="getLang() == 'ar'">
+                        <nz-input-group nzPrefixIcon="environment" class="input-icon">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                nz-input 
+                                formControlName="address" 
+                                placeholder="العنوان" 
+                                (keyup)="changeAddress($event)"/>                     
+                        </nz-input-group>
+                    </nz-form-control>
+                    <nz-form-control nzErrorTip="Please enter your address" *ngIf="getLang() == 'en'" [class.text-left]="getLang() == 'en'">
+                        <nz-input-group nzPrefixIcon="environment" class="input-icon">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                nz-input 
+                                formControlName="address" 
+                                placeholder="Address" 
+                                (keyup)="changeAddress($event)"/>                     
+                        </nz-input-group>
+                    </nz-form-control>                    
+                </nz-form-item>                 
+            </div>            
+
+            <div class="col-md-6">
+                <nz-form-item class="ceck-form" *ngIf="getLang() == 'ar'">
+                    <nz-input-group nzPrefixIcon="edit" class="input-icon">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            nz-input 
+                            formControlName="notes" 
+                            placeholder="ملاحظات"
+                            id="js_notes" />                        
+                        </nz-input-group>
+                </nz-form-item> 
+                <nz-form-item class="ceck-form" *ngIf="getLang() == 'en'" [class.text-left]="getLang() == 'en'">
+                    <nz-input-group nzPrefixIcon="edit" class="input-icon">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            nz-input 
+                            formControlName="notes" 
+                            placeholder="Comments"
+                            id="js_notes" />                        
+                        </nz-input-group>
+                </nz-form-item>                
+            </div>
+
+            <div class="col-md-12">
+                <agm-map  [latitude]="lat" [longitude]="lng" [zoom]="zoom" #map3>
+                    <agm-marker  (dragEnd)="markerDragEnd($event)"
+                    [markerDraggable]="true" [latitude]="lat" [longitude]="lng"></agm-marker>
+                </agm-map>
+            </div>
+        </div>                   
+    </div>
+</form>

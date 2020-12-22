@@ -1,0 +1,69 @@
+@import './../../../../assets/sass/helpers/vars';
+
+.product-details{
+    .wrapper-box{
+        margin-bottom: 15px;
+        span{
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        span.for-desc{
+            font-weight: bold;
+            color: $fixedElementColor;            
+        }
+
+        span.desc{
+            color: $subTitle;
+            small{margin-left: 5px;}
+        }
+    }
+}
+
+.gallery{
+    margin:0 auto;
+    position:relative;
+}
+
+.pics{
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .1)
+}
+
+.gallery .pics .full{
+    margin-top: 15px;
+    display: block;
+}
+
+.product-details,
+.product-ratings,
+.product-related{
+    margin-top: 15px;
+    margin-bottom: 0 !important;
+}
+
+@media (min-width: 300px) and (max-width: 767px) { 
+    .gallery{margin-bottom: 15px;}
+}
+
+.rating-list li{color: #6f6f6f;}
+
+.rating-list li.rating-items{
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.rating-list li.rating-items:last-of-type{border-bottom: none;}
+
+.rating-list li span{display: inline !important;}
+.found-offer {
+
+    text-decoration: line-through;
+}
+
+.add-left{margin-left: 10px;}
+
+.add-right{margin-right: 10px;}

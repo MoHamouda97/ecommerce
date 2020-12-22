@@ -1,0 +1,9 @@
+<section class="products-section" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container">
+        <h4 class="product-section-title">
+            <span>{{lang.bestSeller}}</span>
+        </h4>
+
+        <app-product-card [products]="bestSellers" [temp]="'bestseller'"></app-product-card>
+    </div>
+</section>

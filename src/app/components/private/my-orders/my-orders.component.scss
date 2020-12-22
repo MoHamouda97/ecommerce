@@ -1,0 +1,10 @@
+.order-record{
+    cursor: pointer;
+    transition: all .3s ease-out;
+
+    &:hover{background-color: #f8f8f8;}
+}
+
+td{vertical-align: middle;}
+
+.form{display: none;}

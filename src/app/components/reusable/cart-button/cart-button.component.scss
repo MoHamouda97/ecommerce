@@ -1,0 +1,21 @@
+@import './../../../../assets/sass/helpers/vars';
+
+.add-to-cart{
+    color: #fff;
+    background-color: $mainColor;
+    transition: all .3s ease-out;
+    text-align: center !important;
+
+    &:hover{
+        background-color: $hoverColor;
+    }
+
+    i{margin-left: 5px;}
+}
+
+.lang-en{
+    i{
+        margin-right: 5px;
+        margin-left: 0;
+    }
+}

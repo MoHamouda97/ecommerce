@@ -1,0 +1,65 @@
+<div class="footer-links" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container-fluod">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="footer-title">                
+                    {{lang.about}}                
+                </h4>           
+        
+                <ul class="list-unstyled">
+                    <li>
+                        <a routerLink="/about" matRipple>                       
+                            <span>
+                                {{lang.aboutPage}}
+                            </span>                        
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/terms" matRipple>                        
+                            <span>
+                                {{lang.terms}}
+                            </span>                       
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/policy" matRipple>                        
+                            <span>
+                                {{lang.policy}}
+                            </span>                        
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/info" matRipple>                        
+                            <span>
+                                {{lang.info}}
+                            </span>                        
+                        </a>
+                    </li>                                    
+                </ul>
+            </div>
+    
+            <div class="col-md-6">
+                <h4 class="footer-title">                
+                    {{lang.service}}               
+                </h4>             
+        
+                <ul class="list-unstyled">
+                    <li>
+                        <a routerLink="/my-orders" matRipple>                        
+                            <span>
+                                {{lang.myOrders}}        
+                            </span>                       
+                        </a>
+                    </li>                     
+                    <li>
+                        <a routerLink="/change-password" matRipple>                        
+                           <span>
+                            {{lang.changePwp}}         
+                            </span>                     
+                        </a>
+                    </li>                                 
+                </ul>
+            </div>        
+        </div> 
+    </div>   
+</div>

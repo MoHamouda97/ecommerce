@@ -1,0 +1,90 @@
+<section class="cart" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container">
+        <div class="row" *ngIf="cartItems.length > 0; else noCart">
+            <div class="col-md-9">
+                <h2 class="page-title">
+                    <span *ngIf="getLang() == 'ar'">سلة المشتريات</span> 
+                    <span *ngIf="getLang() == 'en'">Cart Items</span>
+                    ({{cartItems.length}})
+                </h2>
+                <div class="border-box">
+                    <div class="table-responsive">
+                        <table class="table text-center">
+                            <thead>
+                              <tr>
+                                <th scope="col">
+                                    <span *ngIf="getLang() == 'ar'">صورة المنتج</span>
+                                    <span *ngIf="getLang() == 'en'">Image</span>
+                                </th>
+                                <th scope="col">
+                                    <span *ngIf="getLang() == 'ar'">المنتج</span>
+                                    <span *ngIf="getLang() == 'en'">Item</span>                                    
+                                </th>
+                                <th scope="col" colspan="3">
+                                    <span *ngIf="getLang() == 'ar'">الكمية</span>
+                                    <span *ngIf="getLang() == 'en'">Quantity</span>                                    
+                                </th>
+                                <th scope="col">
+                                    <span *ngIf="getLang() == 'ar'">السعر</span>
+                                    <span *ngIf="getLang() == 'en'">Price</span>                                    
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of cartItems; let i = index">
+                                <td scope="row">
+                                    <div class="cart-img-product" [style.background]="'url('+item.image+')'"></div>
+                                </td>
+                                <td>{{item.name}}</td>
+                                <td>
+                                    <div 
+                                        class="btn" 
+                                        matRipple
+                                        (click)="increaseOrDecreaseQuantity(i, 1)">
+                                        <i nz-icon nzType="plus" nzTheme="outline"></i>
+                                    </div>                                
+                                </td>
+                                <td>
+                                    {{item.quantity}}                            
+                                </td>
+                                <td>
+                                    <div 
+                                        class="btn" 
+                                        matRipple
+                                        (click)="increaseOrDecreaseQuantity(i, -1)">
+                                        <i nz-icon nzType="minus" nzTheme="outline"></i>
+                                    </div>
+                                </td>
+                                <td>{{item.quantity * item.price * getCurrencyvalue()  | number : '1.0-2'}}</td>
+                              </tr>                    
+                            </tbody>
+                          </table>
+                    </div> 
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="total-box">
+                    <h4>
+                        <span *ngIf="getLang() == 'ar'">الاجمالي:</span>
+                        <span *ngIf="getLang() == 'en'">Total:</span>                         
+                    </h4>
+                    <h2>                                                
+                        <span style="margin-right: 5px;color:red;font-size: 14px;">{{prices * getCurrencyvalue()  | number : '1.0-2'}}</span>
+                        <span style="font-size: 14px;"> {{getCurrencyName()}}</span>
+                    </h2>
+                </div>
+                <a routerLink="/checkout" class="btn" matRipple>                    
+                    <span *ngIf="getLang() == 'ar'">إتمام العملية</span>
+                    <span *ngIf="getLang() == 'en'">Proceed</span>                      
+                </a>
+            </div>    
+        </div>    
+    </div>
+</section>
+
+<ng-template #noCart>
+    <div class="wrapper-box text-center" style="color: red">
+        <span *ngIf="getLang() == 'ar'">لا توجد منتجات في السلة</span>
+        <span *ngIf="getLang() == 'en'">No Items on the Cart</span>
+    </div>    
+</ng-template>

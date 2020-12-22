@@ -1,0 +1,55 @@
+@import './../../../../assets/sass/helpers/vars';
+
+.cart{
+    .border-box{padding: 20px !important;}
+
+    .total-box, .border-box{ 
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #eaeaea;
+        border-radius: 5px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, .1)        
+    }
+
+    .total-box{
+        h6{
+            font-size: 12px;
+            color: $subTitle;
+            font-weight: normal;
+        }
+
+        h2{
+            color: $fixedElementColor;
+            font-weight: bold;
+
+            small{
+                font-size: 12px;
+                color: $subTitle;
+                font-weight: normal;
+            }
+        }
+    }
+
+    a{
+        color: #fff !important;
+        border-color: #7cb62e;
+        background-color: #91CE3F;
+        background-image: linear-gradient(top,#91ce3f,#87af40);
+        background-image: -webkit-linear-gradient(top,#91ce3f,#87af40);
+        display: block;
+        margin-top: 15px;
+    }    
+}
+
+.cart-img-product{
+    height: 80px;
+    width: 80px;
+    background-size: cover !important;
+    border-radius: 50%;
+    margin: 0;
+    margin: auto;
+}
+
+@media (min-width: 300px) and (max-width: 767px) { 
+    .cart .border-box{margin-bottom: 20px;}
+}

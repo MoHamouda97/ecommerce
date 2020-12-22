@@ -1,0 +1,133 @@
+<nav class="main-nav" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container-fluid">
+        <div class="row center-align">
+            <div class="col-4 col-sm-3 col-md-3 col-lg-3">
+                <i class="fas fa-bars nav-menu" id="js_small_button"></i>
+                <a routerLink="/">
+                    <img src="./../../../../../assets/images/ajwad.png" alt="logo" class="logo" />
+                </a>
+            </div>
+            <div class="col-6 col-sm-5 col-md-5 searchbar">
+                <nz-input-group id="js_site_search" nzPrefixIcon="search">
+                    <input                            
+                        type="text"
+                        class="search"
+                        [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}" 
+                        nz-input 
+                        [placeholder]="searchBoxPlaceHolder()"
+                        [(ngModel)]="inputValue" 
+                        (keyup)="onInput($event)"
+                        (focus)="clear()" 
+                        [nzAutocomplete]="auto" /> 
+                    <nz-autocomplete #auto>
+                        <nz-auto-option 
+                            *ngIf="isSearch" 
+                            [nzValue]="0" 
+                            [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">                            
+                            <span> {{lang.search}} </span> 
+                            <i nz-icon nzType="loading" class="loading-icon"></i>
+                        </nz-auto-option>                                
+                        <nz-auto-option 
+                            *ngFor="let result of results" 
+                            [nzValue]="result.name"  
+                            [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+                            <a routerLink="product/{{result.id}}">
+                                <span *ngIf="getLang() == 'ar'">{{ result.name }}</span> 
+                                <span *ngIf="getLang() == 'en'">{{ result.name_en }}</span>                                     
+                            </a>                                
+                        </nz-auto-option>                                                          
+                    </nz-autocomplete>                                                        
+                </nz-input-group>                
+            </div>
+            <div class="col-8 col-sm-4 col-md-4">
+                <ul class="list-unstyled flat-list" style="flex-direction: row-reverse;">
+                    <li matRipple>
+                        <a routerLink="/cart" style="color: #fff !important;">
+                            <span class="cart">
+                                <i class="fas fa-shopping-cart"></i>
+                                <small class="cart-num">{{countCartItems()}}</small>
+                            </span> 
+                        </a>                       
+                    </li>
+                    <li 
+                        matRipple 
+                        class="show-search"
+                        nz-dropdown 
+                        [nzDropdownMenu]="search" 
+                        [nzClickHide]="false" 
+                        [(nzVisible)]="searchVisible" 
+                        matRipple>
+                        <i class="fas fa-search"></i>
+                        <nz-dropdown-menu #search="nzDropdownMenu">                           
+                            <ul nz-menu class="lang-ar">
+                                <li nz-menu-item matRipple>
+                                    <nz-input-group id="js_site_search" nzPrefixIcon="search">
+                                        <input                            
+                                            type="text"
+                                            class="search" 
+                                            [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}"
+                                            nz-input 
+                                            [placeholder]="searchBoxPlaceHolder()"
+                                            [(ngModel)]="inputValue" 
+                                            (keyup)="onInput($event)"
+                                            (focus)="clear()" 
+                                            [nzAutocomplete]="auto" /> 
+                                        <nz-autocomplete #auto>
+                                            <nz-auto-option 
+                                                *ngIf="isSearch" 
+                                                [nzValue]="0" 
+                                                [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">                            
+                                                <span> {{lang.search}} </span> 
+                                                <i nz-icon nzType="loading" class="loading-icon"></i>
+                                            </nz-auto-option>                                
+                                            <nz-auto-option 
+                                                *ngFor="let result of results" 
+                                                [nzValue]="result.name"  
+                                                [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+                                                <a routerLink="product/{{result.id}}">
+                                                    <span *ngIf="getLang() == 'ar'">{{ result.name }}</span> 
+                                                    <span *ngIf="getLang() == 'en'">{{ result.name_en }}</span>                                    
+                                                </a>                                
+                                            </nz-auto-option>                                                           
+                                        </nz-autocomplete>                                                        
+                                    </nz-input-group>                                  
+                                </li>                               
+                            </ul>
+                        </nz-dropdown-menu>                         
+                    </li>
+                    <li 
+                        nz-dropdown 
+                        [nzDropdownMenu]="login" 
+                        [nzClickHide]="true" 
+                        [(nzVisible)]="loginVisible" 
+                        matRipple
+                        class="login">
+                        <i class="fas fa-sort-down"></i>
+                        <span>{{lang.login}}</span>                        
+                        <nz-dropdown-menu #login="nzDropdownMenu">                           
+                            <ul nz-menu [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+                                <li nz-menu-item matRipple>
+                                    <a routerLink="/login">
+                                        <span>{{lang.login}}</span>
+                                    </a>                                 
+                                </li>                                                                
+                                <li nz-menu-item matRipple>
+                                    <a routerLink="/my-orders">
+                                        <span>{{lang.myOrders}}</span>
+                                    </a>                                 
+                                </li>
+                                <!--<li nz-menu-item matRipple>
+                                    <a routerLink="/">
+                                      <span>{{lang.favourite}}</span>
+                                    </a>                                  
+                                </li>-->                                
+                            </ul>
+                        </nz-dropdown-menu>                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<app-side-nav></app-side-nav>

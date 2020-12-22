@@ -1,0 +1,19 @@
+@import './../../../../../assets/sass/helpers/vars';
+
+.footer-social-links{
+    background-color: #565357;
+    padding: 10px;
+
+    li{
+        font-size: 18px;
+        color:black;
+        display: inline-block;
+
+        a{
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            color: $mainColor !important;
+        }
+    }
+}

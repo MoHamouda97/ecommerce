@@ -1,0 +1,137 @@
+<section class="checkout" [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="page-title">                    
+                    <span>  
+                        {{lang.CompletePayment}}
+                    </span>                   
+                </h2>                
+            </div>
+            <div class="col-md-4" style="margin-bottom: 15px;">
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <span>  
+                            {{lang.PaymentOrder}}
+                        </span>                           
+                      </h5>
+                      <ul class="list-unstyled">
+                          <li *ngFor="let item of cartItems">
+                              <span style="color: blue;"><b>{{item.name}}</b></span>
+                              <span 
+                                style="color: red;"
+                                [class.float-left]="getLang() == 'ar'"
+                                [class.float-right]="getLang() == 'en'">{{item.price * item.quantity * getCurrencyvalue() | number : '1.0-2'}}</span>
+                          </li>                        
+                      </ul>
+                      <span class="d-block">
+                          <small style="color: black;">{{lang.orderTotal}}:</small>
+                          <b  
+                            style="color: red;"
+                            [class.float-left]="getLang() == 'ar'"
+                            [class.float-right]="getLang() == 'en'"
+                            [class.lang-en-revert]="getLang() == 'en'">
+                              {{(prices * getCurrencyvalue() | number : '1.0-2') + " " + getCurrencyName()}}
+                          </b>
+                      </span>
+                      <span class="d-block">
+                        <small style="color: black;">{{lang.orderShipping}}:</small>                       
+                        <b  
+                            style="color: red;"
+                            [class.float-left]="getLang() == 'ar'"
+                            [class.float-right]="getLang() == 'en'">
+                            {{getShipping() + " " + getCurrencyName()}}
+                        </b>
+                      </span>    
+                      <span class="d-block">
+                        <small style="color: black;">{{lang.totalOrder}}:</small>                         
+                        <b 
+                            style="color: red;"
+                            [class.float-left]="getLang() == 'ar'"
+                            [class.float-right]="getLang() == 'en'"
+                            [class.lang-en-revert]="getLang() == 'en'">
+                            {{((prices + getShipping()) * getCurrencyvalue() | number : '1.0-2') + " " + getCurrencyName()}}
+                        </b>
+                      </span>                                        
+                    </div>
+                </div>                
+            </div>
+            <div class="col-md-8" style="margin-bottom: 15px;">
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">                          
+                        <span>  
+                            {{lang.shippingInfo}}
+                        </span>                         
+                      </h5>
+                      <checkout-form></checkout-form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" *ngIf="bool">
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <span>  
+                            {{lang.paymentMethod}}
+                        </span>                             
+                      </h5>
+                      <nz-radio-group 
+                        [ngModel]="radioValue" 
+                        nzName="radiogroup" 
+                        [class.w-100]="getLang() == 'en'"
+                        [class.text-left]="getLang() == 'en'">
+                        <label nz-radio nzValue="paypal" (click)="showPaypal()">                            
+                            <span>  
+                                {{lang.creditCard}}
+                            </span>                            
+                        </label>  
+                        <label nz-radio nzValue="bank" (click)="hidePaypal()">
+                            <span>  
+                                {{lang.bankTransfer}}
+                            </span>                            
+                        </label>                                              
+                      </nz-radio-group>
+                      <div id="js_payment_box_cash">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span class="d-block" style="color: red;">{{lang.bankName}}:</span>
+                                <span class="d-block" style="color: red;">{{lang.accountName}}:</span>
+                                <span class="d-block" style="color: red;">{{lang.acountNumber}}:</span>
+                                <span class="d-block" style="color: red;">{{lang.comment}}:</span>
+                            </div> 
+                                                         
+                            <div class="col-md-6">
+                                <span class="d-block" style="color: blue;">{{lang.bankNameFixed}}</span>
+                                <span class="d-block" style="color: blue;">{{lang.bankNameFixed}}</span>
+                                <span class="d-block" style="color: blue;">{{lang.acountNumberFixed}}</span>
+                                <span class="d-block" style="color: blue;">{{lang.commentFixed}}</span>
+                            </div>
+                                                          
+                            <div class="col-md-12">
+                                <button class="btn btn-block order-now" matRipple (click)="orderNow()">                                    
+                                    <div class="loader text-center w-100" *ngIf="loader">
+                                        <nz-spin nzSimple></nz-spin>
+                                    </div>                        
+                                    <span *ngIf="!loader">
+                                        {{lang.addRequest}}                                    
+                                    </span>                                                                                                                                                                 
+                                </button>                
+                            </div>                                                                                  
+                        </div>
+                      </div>
+                      <div id="js_payment_box_paypal">
+                        <div class="row">
+                            <div class="col-md-12">
+                              <ngx-paypal [config]="payPalConfig" class="text-center"></ngx-paypal>
+                            </div>                            
+                        </div>
+                      </div>                      
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</section>

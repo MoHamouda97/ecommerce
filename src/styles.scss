@@ -1,1 +1,127 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Roboto:wght@300;500;700&display=swap');
+@import './assets/sass/helpers/vars';
+
+// general style
+
+body{
+    background-color: $bodyColor;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+a{color: #1585cf !important;}
+
+section{
+    position: relative;
+    padding-top: 55px;
+    min-height: 350px;
+}
+
+.table td, .table th{vertical-align: middle !important;}
+
+// classes
+
+.lang-ar{
+    font-family: $arFont !important;
+    text-align: right;
+    direction: rtl;
+}
+
+.lang-en{
+    font-family: $enFont !important;
+    text-align: left !important;
+    direction: ltr;
+}
+
+.center-align{
+    align-items: center;
+    align-content: center;
+}
+
+.flat-list{
+    display: flex;
+    li{
+        padding: 5px;
+        text-align: center;
+        border-radius: 5px;
+        margin-left: 8px;
+        cursor: pointer;        
+    }
+}
+
+.product-section-title{
+    border-bottom: 3px solid $mainColor;
+    font-weight: bold;
+    color: $fixedElementColor;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.special-link{
+    display: block;
+    width: fit-content;
+    text-decoration: none !important;
+}
+
+.page-title{
+    color: $fixedElementColor;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 25px;    
+}
+
+.wrapper-box{
+    padding: 1.25rem;
+    background-color: #fff;
+    border: 1px solid $mainColor;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .1)
+}
+
+.static-page-content{
+    text-align: justify;
+    line-height: 1.2em;
+    font-size: 16px;
+    color: $subTitle;
+}
+
+// Ant
+
+.ant-input-prefix{
+    padding: 7px;
+    display: inline-block;
+    line-height: 12px;
+    margin-right: 0;
+}
+
+.lang-en .ant-notification-notice-icon{
+    left: 17px;
+    right: auto;
+}
+
+.ant-select{width: 100% !important;}
+
+// Bootstrap
+
+.card-img .card-img-top{
+    height: 300px;
+    min-height: 300px;
+}
+
+.card{height: 460px !important;}
+
+.card-title{font-size: 15px;}
+
+// owl
+
+.owl-theme .owl-nav [class*=owl-]:hover{
+    background-color: $mainColor !important;
+}

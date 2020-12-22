@@ -1,0 +1,149 @@
+<div 
+    class="row" 
+    *ngIf="temp === 'bestseller'" 
+    [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="col-md-3" *ngFor="let product of products" style="margin-bottom: 20px;">
+      <a
+        routerLink="/product/{{product.product_id}}" 
+        class="special-link" 
+        matRipple>    
+          <div class="card text-center">
+            <img 
+              class="card-img-top" 
+              style="height: 300px; min-height: 300px;" 
+              src="{{product.product.productphotos[0].photo}}" 
+              alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title" *ngIf="getLang() == 'ar'">{{product.product.name}}</h5>
+              <h5 class="card-title" *ngIf="getLang() == 'en'">{{product.product.name_en}}</h5>
+              <p class="card-text">
+                  <span class="price">
+                    {{product.current_price * getCurrencyvalue()  | number : '1.0-2' }} {{getCurrencyName()}}
+                  </span>
+              </p>            
+            </div>
+            <diV class="footer">
+              <app-cart-button [product]="product" [temp]="'bestseller'"></app-cart-button>
+            </diV>
+          </div>
+      </a>
+    </div>
+  </div>
+  
+  <div 
+    class="row" 
+    *ngIf="temp === 'offer'" 
+    [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="col-md-3" *ngFor="let product of products" style="margin-bottom: 20px;">
+      <a
+        routerLink="/product/{{product.product_id}}" 
+        class="special-link" 
+        matRipple>
+          <div class="card text-center" style="position: relative;">
+            <img 
+              class="card-img-top" 
+              style="height: 300px; min-height: 300px;" 
+              src="{{product.product ? product.product.img : '1111'}}" 
+              alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{product.product ? product.product.name : '1111'}}</h5>
+              <p class="card-text">
+                  <span class="price">
+                    {{(((product.product.productsizes[0].current_price * getCurrencyvalue()) )  -  (product.product.productsizes[0].current_price * getCurrencyvalue() * product.percentage) / 100 ) | number : '1.0-2' }} {{getCurrencyName()}}
+                  </span>
+              </p>
+            </div>
+            <diV class="footer">
+              <app-cart-button [product]="product" [temp]="'offer'"></app-cart-button>
+            </diV>
+            <div class="offer-percentage">
+              % {{ product.product ?  product.percentage  : '1111'}} 
+            </div>          
+          </div>
+      </a>
+    </div>
+  </div>
+  
+  <div 
+    class="row" 
+    *ngIf="temp == 'new'" 
+    [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="col-md-3" *ngFor="let product of products" style="margin-bottom: 20px;">
+      <a
+        routerLink="/product/{{product.id}}" 
+        class="special-link" 
+        matRipple>
+          <div class="card text-center">
+            <img 
+              class="card-img-top" 
+              style="height: 300px; min-height: 300px;" 
+              src="{{product.img}}" 
+              alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5>
+              <p class="card-text">
+                  <span class="price">
+                    {{product.productsizes[0].current_price * getCurrencyvalue() | number : '1.0-2'}} {{getCurrencyName()}}
+                  </span>
+              </p>
+            </div>
+            <diV class="footer">
+              <app-cart-button [product]="product" [temp]="'new'"></app-cart-button>
+            </diV>  
+          </div>
+             
+      </a>
+    </div>
+  </div>
+  
+  <div 
+    class="row" 
+    *ngIf="temp === 'cat'" 
+    [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="col-md-6" *ngFor="let product of products" style="margin-bottom: 20px;">
+      <a
+        routerLink="/store/product/{{product.id}}" 
+        class="special-link w-100" 
+        matRipple>
+        <div class="store-box w-100">
+          <h4>{{product.name}}</h4>
+          <div 
+            class="store-cover" 
+            [style.background]="'url('+product.cover+')'"></div>
+          <h5>{{product.address}}</h5>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <div 
+    class="row" 
+    *ngIf="temp === 'related'" 
+    [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="col-md-3" *ngFor="let product of products" style="margin-bottom: 20px;">
+      <a
+          routerLink="/product/{{product.id}}" 
+          class="special-link" 
+          matRipple>    
+          <div class="card text-center">
+            <img 
+              class="card-img-top"
+              style="height: 300px; min-height: 300px;"  
+              src="{{product.img}}" 
+              alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title" *ngIf="getLang() == 'ar'">{{product.name}}</h5>
+              <h5 class="card-title" *ngIf="getLang() == 'en'">{{product.name_en}}</h5>            
+              <p class="card-text">
+                  <span class="price">
+                    {{product.productsizes[0].current_price * getCurrencyvalue() | number : '1.0-2'}} {{getCurrencyName()}}
+                  </span>
+              </p>
+            </div>
+          </div>
+          <diV class="footer">
+            <app-cart-button [product]="product" [temp]="'related'"></app-cart-button>
+          </diV>           
+      </a>
+    </div>
+  </div>

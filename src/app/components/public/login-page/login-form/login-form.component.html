@@ -1,0 +1,115 @@
+<form
+    nz-form
+    [formGroup]="loginForm"
+    (ngSubmit)="login()"
+    id="js_login"
+    [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="input-group-lg">
+        <nz-form-item class="login-form">
+            <nz-form-control [nzErrorTip]="errorTipUser()">
+                <nz-input-group nzPrefixIcon="user" class="input-icon">
+                        <input
+                            type="text"
+                            class="form-control" 
+                            nz-input 
+                            formControlName="username" 
+                            [placeholder]="lang.loginUsername" />                                                  
+                </nz-input-group>
+            </nz-form-control>            
+        </nz-form-item>
+
+        <nz-form-item class="login-form">
+            <nz-form-control [nzErrorTip]="errorTipPassword()">
+                <nz-input-group nzPrefixIcon="lock" class="input-icon">
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            nz-input 
+                            formControlName="pwp" 
+                            [placeholder]="lang.loginPwp"/>                                                    
+                </nz-input-group>                
+            </nz-form-control>              
+        </nz-form-item>        
+    </div>
+    <div class="input-group-lg">
+        <nz-form-item>
+            <nz-form-control>
+                <button
+                    [disabled]="!loginForm.valid"
+                    class="form-control" 
+                    nz-button 
+                    matRipple>
+                    <div class="loader text-center w-100" *ngIf="loader">
+                        <nz-spin nzSimple></nz-spin>
+                    </div>                        
+                    <span>
+                        {{lang.loginBtn}}
+                    </span>                      
+                </button>
+            </nz-form-control>
+        </nz-form-item>                    
+    </div>    
+</form>
+
+<form
+    nz-form
+    [formGroup]="pwpBackForm"
+    (ngSubmit)="pwp()"
+    id="js_pwp_back"
+    [ngClass]="{'lang-ar' : getLang() == 'ar', 'lang-en': getLang() == 'en'}">
+    <div class="input-group-lg">
+        <nz-form-item class="reg-form">
+            <nz-form-control [nzErrorTip]="errorTipEmail()">
+                <nz-input-group nzPrefixIcon="inbox" class="input-icon">
+                        <input
+                            type="email"
+                            class="form-control" 
+                            nz-input 
+                            formControlName="email" 
+                            [placeholder]="lang.emailPlaceholder"
+                            [(ngModel)]="inputValue" 
+                            (input)="onInput($event)" 
+                            [nzAutocomplete]="auto" />   
+                            <nz-autocomplete #auto>
+                                <nz-auto-option *ngFor="let option of options" [nzValue]="option">{{ option }}</nz-auto-option>
+                            </nz-autocomplete>                     
+                </nz-input-group>
+            </nz-form-control>          
+        </nz-form-item>
+
+    </div>
+    <div class="input-group-lg">
+        <nz-form-item>
+            <nz-form-control>
+                <button
+                    [disabled]="!pwpBackForm.valid"
+                    class="form-control" 
+                    nz-button 
+                    matRipple>
+                    <div class="loader text-center w-100" *ngIf="pwploader">
+                        <nz-spin nzSimple></nz-spin>
+                    </div>                        
+                    <span>
+                        {{lang.pwpBackBtn}}
+                    </span>                       
+                </button>
+            </nz-form-control>
+        </nz-form-item>                    
+    </div>    
+</form>
+
+<a (click)="showPwpForm()" id="js_forget_pwp">    
+    <span *ngIf="!loader">
+        {{lang.forgetPwp}}
+    </span>          
+</a>
+<a routerLink="/register" [class.float-left]="getLang() == 'ar'" [class.float-right]="getLang() == 'en'">    
+    <span *ngIf="!loader">
+        {{lang.newAccountFromLogin}}
+    </span>          
+</a>
+<a (click)="showLoginForm()" id="js_show_login" class="d-none">    
+    <span *ngIf="!loader">
+        {{lang.askLogin}}
+    </span>    
+</a>
